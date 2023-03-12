@@ -21,7 +21,7 @@ const Navbar = () => {
           }}
         >
           <img src={logo} alt='benjaminsteidl' className='w-9 h-9 object-contain' />
-          <p className='text-white text-[16px] font-medium cursor-pointer flex'>
+          <p className='text-silver text-[16px] font-medium cursor-pointer flex'>
             Benjamin &nbsp;
             <span className='sm:block hidden'>
               | Javascript
@@ -33,9 +33,9 @@ const Navbar = () => {
             <li
               key={link.id}
               className={`${active === link.title
-                  ? 'text-white'
+                  ? 'text-silver'
                   : 'text-secondary'
-                } hover:text-white text-[18px] font-medium cursor-pointer`}
+                } hover:text-silver text-[18px] font-medium cursor-pointer`}
               onClick={() => setActive(link.title)}
             >
               <a href={`#${link.id}`}>{link.title}</a>
@@ -55,7 +55,7 @@ const Navbar = () => {
               <li
                 key={link.id}
                 className={`${active === link.title
-                    ? 'text-white'
+                    ? 'text-silver'
                     : 'text-secondary'
                   } font-poppins text-[16px] font-medium cursor-pointer`}
                 onClick={() => {

@@ -5,6 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        silver: "#EAEAEA",
+        gold: "#DDBD54",
         primary: "#050816",
         secondary: "#aaa6c3",
         tertiary: "#151030",
