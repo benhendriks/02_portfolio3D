@@ -54,7 +54,6 @@ const Contact = () => {
           alert('Something went wrong!')
         })
   };
-      console.log("🚀 ~ file: Contact.jsx:57 ~ handleSubmit ~ import.meta.env.VITE_SERVICE_ID,:", import.meta.env.VITE_SERVICE_ID,)
   return (
     <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
       <motion.div
