@@ -6,6 +6,7 @@ import { EarthCanvas } from './canvas';
 import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 
+
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({
@@ -13,14 +14,47 @@ const Contact = () => {
     email: '',
     message: '',
   });
+
   const [loading, setLoading] = useState(false);
-  const handleChange = () => {
-    
+
+  const handleChange = (e) => {
+    const { target } = e;
+    const { name, value } = target;
+
+    setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
 
+    emailjs.send(
+      import.meta.env.VITE_SERVICE_ID,
+      import.meta.env.VITE_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          to_name: 'Moxy',
+          from_email: form.email,
+          to_email: 'rvondestraat@gmail.com',
+          message: form.message,
+        },
+        import.meta.env.VITE_PUBLIC_KEY
+        )
+        .then(() => {
+          setLoading(false);
+          alert('Thank you. I wil get back to you as soon as possible.');
+          setForm({
+            name: '',
+            email: '',
+            message: '',        
+          })
+        }, (error) => {
+          setLoading(false);
+          console.log(error);
+          alert('Something went wrong!')
+        })
   };
+      console.log("🚀 ~ file: Contact.jsx:57 ~ handleSubmit ~ import.meta.env.VITE_SERVICE_ID,:", import.meta.env.VITE_SERVICE_ID,)
   return (
     <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
       <motion.div
@@ -31,7 +65,7 @@ const Contact = () => {
         <h3 className={styles.sectionHeadText}>Contact.</h3>
         <form 
           ref={formRef}
-          onSubmit={handleSubmit()}
+          onSubmit={handleSubmit}
           className='mt-12 flex flex-col gap-8'
         >
           <label className='flex flex-col'>
@@ -40,7 +74,7 @@ const Contact = () => {
               type='text'
               name='name'
               value={form.name}
-              onChange={handleChange()}
+              onChange={handleChange}
               placeholder='What`s your name?'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium'
             />
@@ -51,7 +85,7 @@ const Contact = () => {
               type='email'
               name='email'
               value={form.email}
-              onChange={handleChange()}
+              onChange={handleChange}
               placeholder='What`s your email?'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium'
             />
@@ -62,7 +96,7 @@ const Contact = () => {
               rows='7'
               name='message'
               value={form.message}
-              onChange={handleChange()}
+              onChange={handleChange}
               placeholder='What do you want to say?'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium'
             />
